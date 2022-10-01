@@ -1,4 +1,4 @@
-package org.rost.scpirngcourse.config;
+package org.rost.springcourse.config;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 @Configuration
-@ComponentScan("org.rost.scpirngcourse")
+@ComponentScan("org.rost.springcourse")
 @EnableWebMvc
 public class SpringConfig implements WebMvcConfigurer {
 

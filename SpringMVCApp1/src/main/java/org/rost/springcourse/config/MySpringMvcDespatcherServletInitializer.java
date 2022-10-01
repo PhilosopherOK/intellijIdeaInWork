@@ -1,4 +1,4 @@
-package org.rost.scpirngcourse.config;
+package org.rost.springcourse.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

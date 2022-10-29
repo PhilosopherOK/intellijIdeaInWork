@@ -1,14 +1,10 @@
-package org.example;
+package org.example.less48_homework;
 
-import org.example.models.les48.Item;
-import org.example.models.les48.Person;
+import org.example.models.les48_homework.Item;
+import org.example.models.les48_homework.Person;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class App48_ {
     public static void main(String[] args) {

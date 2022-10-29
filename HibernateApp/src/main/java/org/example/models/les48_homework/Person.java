@@ -1,4 +1,4 @@
-package org.example.models.les48;
+package org.example.models.les48_homework;
 
 
 import jakarta.persistence.*;

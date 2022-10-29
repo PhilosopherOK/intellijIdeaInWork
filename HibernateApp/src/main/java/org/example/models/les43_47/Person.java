@@ -1,4 +1,4 @@
-package org.example.models;
+package org.example.models.les43_47;
 
 
 import jakarta.persistence.*;
@@ -6,11 +6,9 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "Person")
 public class Person {
-
+    @Id
     @Column(name = "id")
-   // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Syq1")
-    @SequenceGenerator(name = "Syq1", sequenceName = "sequence_id", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "name")
@@ -26,6 +24,7 @@ public class Person {
         this.name = name;
         this.age = age;
     }
+
 
     public int getId() {
         return id;

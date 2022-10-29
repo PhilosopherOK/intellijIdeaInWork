@@ -1,11 +1,9 @@
-package org.example;
+package org.example.les43_47;
 
-import org.example.models.Person;
+import org.example.models.les43_47.Person;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
-import java.util.List;
 
 public class Les47plus {
     public static void main(String[] args) {

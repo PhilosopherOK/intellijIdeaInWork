@@ -1,6 +1,6 @@
-package org.example;
+package org.example.les43_47;
 
-import org.example.models.Person;
+import org.example.models.les43_47.Person;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -18,9 +18,9 @@ public class App {
             session.beginTransaction();
 
             //Check object in BD
-//            Person person = session.get(Person.class, 1);
-//            System.out.println(person.getName());
-//            System.out.println(person.getAge());
+            Person person = session.get(Person.class, 1);
+            System.out.println(person.getName());
+            System.out.println(person.getAge());
 
             // Add object in BD
 //            Person person = new Person("Bobby", 23);

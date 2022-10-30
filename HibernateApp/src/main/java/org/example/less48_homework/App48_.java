@@ -1,7 +1,7 @@
 package org.example.less48_homework;
 
-import org.example.models.les48_homework.Item;
-import org.example.models.les48_homework.Person;
+import org.example.models.les48_homework_manyperone.Item;
+import org.example.models.les48_homework_manyperone.Person;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

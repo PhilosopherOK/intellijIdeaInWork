@@ -1,4 +1,4 @@
-package org.example.models.les48_homework;
+package org.example.models.les48_homework_manyperone;
 
 import jakarta.persistence.*;
 
@@ -24,10 +24,9 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(String name, int year_of_production, Director whoIsDirector) {
+    public Movie(String name, int year_of_production) {
         this.name = name;
         this.year_of_production = year_of_production;
-        this.whoIsDirector = whoIsDirector;
     }
 
     public int getMovie_id() {
@@ -68,7 +67,7 @@ public class Movie {
                 "id=" + movie_id +
                 ", name='" + name + '\'' +
                 ", year_of_production=" + year_of_production +
-                ", whoIsDirector=" + whoIsDirector +
+                ", whoIsDirector=" + whoIsDirector.getName() +
                 '}';
     }
 }

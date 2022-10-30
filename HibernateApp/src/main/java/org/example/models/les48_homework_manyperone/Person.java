@@ -1,4 +1,4 @@
-package org.example.models.les48_homework;
+package org.example.models.les48_homework_manyperone;
 
 
 import jakarta.persistence.*;

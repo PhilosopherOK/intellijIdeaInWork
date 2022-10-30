@@ -1,16 +1,11 @@
 package org.example.less48_homework;
 
 
-import org.example.models.les48_homework.Director;
-import org.example.models.les48_homework.Movie;
+import org.example.models.les48_homework_manyperone.Director;
+import org.example.models.les48_homework_manyperone.Movie;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class Homework_48less {
     public static void main(String[] args) {
@@ -48,16 +43,23 @@ public class Homework_48less {
 //            session.save(movie);
 
             //5 chenge director in any movie
-            Director director = session.get(Director.class, 5);
-            Movie movie = session.get(Movie.class,1);
-            movie.getWhoIsDirector().getMovieList().remove(movie);
+//            Director director = session.get(Director.class, 5);
+//            Movie movie = session.get(Movie.class,1);
+//            movie.getWhoIsDirector().getMovieList().remove(movie);
+//            movie.setWhoIsDirector(director);
+//            director.getMovieList().add(movie);
 
-            movie.setWhoIsDirector(director);
-            director.getMovieList().add(movie);
-
-
+            //6 delete movie to any director
+//            Director director = session.get(Director.class,1);
+//            Movie movie = session.get(Movie.class,1);
+//            director.getMovieList().remove(movie);
+//            session.delete(movie);
+//            List <Movie> mov = director.getMovieList();
+//            for(Movie mov1: mov)
+//                System.out.println(mov1);
 
             session.getTransaction().commit();
+
         } finally {
             sessionFactory.close();
         }

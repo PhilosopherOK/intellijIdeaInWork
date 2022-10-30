@@ -1,7 +1,9 @@
-package org.example.models.les48_homework;
+package org.example.models.les48_homework_manyperone;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,6 +24,7 @@ public class Director {
     private int age;
 
     @OneToMany(mappedBy = "whoIsDirector")
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private List<Movie> movieList;
 
     public Director() {
@@ -62,6 +65,15 @@ public class Director {
 
     public void setMovieList(List<Movie> movieList) {
         this.movieList = movieList;
+    }
+
+    public void addMovie(Movie movie){
+        if(this.movieList == null)
+            this.movieList = new ArrayList<>();
+
+
+        this.movieList.add(movie);
+        movie.setWhoIsDirector(this);
     }
 
     @Override

@@ -3,7 +3,7 @@ package org.hnatiuk.springcourse.controller;
 
 import org.hnatiuk.springcourse.DAO.PersonDAO;
 import org.hnatiuk.springcourse.models.Person;
-import org.hnatiuk.springcourse.util.PersonValidator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +18,12 @@ import javax.validation.Valid;
 public class PeopleController {
 
     private final PersonDAO personDAO;
-    private final PersonValidator personValidator;
+    //private final PersonValidator personValidator;
 
     @Autowired
-    public PeopleController(PersonDAO personDAO, PersonValidator personValidator) {
+    public PeopleController(PersonDAO personDAO) {
         this.personDAO = personDAO;
-        this.personValidator = personValidator;
+
     }
 
 
@@ -49,7 +49,6 @@ public class PeopleController {
     @PostMapping()
     public String createPerson(@ModelAttribute("person") @Valid Person person,
                                BindingResult bindingResult) {
-        personValidator.validate(person, bindingResult);
         if (bindingResult.hasErrors())
             return "people/new";
 
@@ -66,7 +65,7 @@ public class PeopleController {
     @PatchMapping("/{id}")
     public String updating(@ModelAttribute("person") @Valid Person person,
                            BindingResult bindingResult, @PathVariable("id") int id) {
-        personValidator.validate(person, bindingResult);
+
         if (bindingResult.hasErrors())
             return "people/edit";
 

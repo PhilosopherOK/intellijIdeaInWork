@@ -1,4 +1,4 @@
-package ru.alishev.springcourse.models;
+package org.hnatiuk.springcourse.models;
 
 import jakarta.persistence.*;
 

@@ -1,12 +1,14 @@
 package org.hnatiuk.springcourse.services;
 
 
+import org.hnatiuk.springcourse.models.Mood;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.hnatiuk.springcourse.models.Person;
 import org.hnatiuk.springcourse.repositories.PeopleRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +33,9 @@ public class PeopleService {
     }
 
     public void save(Person person){
+        person.setDate_of_writen(new Date());
+        person.setMood(Mood.HAPPY);
+        //person.setMood(Mood.HAPPY);
         peopleRepository.save(person);
     }
 

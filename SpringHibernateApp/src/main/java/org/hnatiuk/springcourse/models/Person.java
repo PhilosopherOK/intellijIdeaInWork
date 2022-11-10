@@ -1,11 +1,13 @@
 package org.hnatiuk.springcourse.models;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 @Table(name = "Person")
@@ -31,6 +33,28 @@ public class Person {
     @Email(message = "Email should be valid")
     private String email;
 
+    @Column(name = "date_of_birth")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date date_of_birth;
+
+    @Column(name = "date_of_writen")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date_of_writen;
+
+    @Column(name = "Mood")
+    @Enumerated(EnumType.ORDINAL)
+    //@Enumerated(EnumType.STRING)
+    private  Mood mood;
+
+    public Mood getMood() {
+        return mood;
+    }
+
+    public void setMood(Mood mood) {
+        this.mood = mood;
+    }
+
     public Person() {
 
     }
@@ -39,6 +63,22 @@ public class Person {
         this.name = name;
         this.age = age;
 
+    }
+
+    public Date getDate_of_birth() {
+        return date_of_birth;
+    }
+
+    public void setDate_of_birth(Date date_of_birth) {
+        this.date_of_birth = date_of_birth;
+    }
+
+    public Date getDate_of_writen() {
+        return date_of_writen;
+    }
+
+    public void setDate_of_writen(Date date_of_writen) {
+        this.date_of_writen = date_of_writen;
     }
 
     public String getEmail() {

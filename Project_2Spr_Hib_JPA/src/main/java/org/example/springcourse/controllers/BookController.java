@@ -1,27 +1,43 @@
 package org.example.springcourse.controllers;
 
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.springcourse.models.Book;
+import org.example.springcourse.services.BooksService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/people")
-public class PeopleController {
+@RequestMapping("/books")
+public class BookController {
 
-    private final PeopleService peopleService;
+    private final BooksService booksService;
 
-    @Autowired
-    public PeopleController(PeopleService peopleService) {
-        this.peopleService = peopleService;
+    public BookController(BooksService booksService) {
+        this.booksService = booksService;
     }
 
+
     @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("people", peopleService.findAll());
+    public String index(@RequestParam(value = "page", required = false) int page,
+                        @RequestParam(value = "books_per_page", required = false) int books_per_page,
+                        @RequestParam(value = "sort_by_year", required = false) boolean sort_by_year,
+                        Model model) {
+
+        model.addAttribute("books", booksService.findAll(page, books_per_page, sort_by_year));
         return "people/index";
+    }
+
+
+    //    public String create(@ModelAttribute("person") @Valid Person person,
+//                         BindingResult bindingResult) {
+//        if (bindingResult.hasErrors())
+//            return "people/new";
+    @GetMapping("/searching")
+    public String search(@PathVariable("startingTitle") String startingTitle, Model model) {
+        model.addAttribute("Book", booksService.findByTitleStartingWith(startingTitle));
+        return
     }
 
     @GetMapping("/{id}")
@@ -66,4 +82,5 @@ public class PeopleController {
         peopleService.delete(id);
         return "redirect:/people";
     }
+}
 }

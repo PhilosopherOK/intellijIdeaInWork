@@ -1,5 +1,8 @@
 package org.example.springcourse.services;
 
+
+import org.example.springcourse.models.Person;
+import org.example.springcourse.repositories.PeopleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,18 +31,20 @@ public class PeopleService {
         return foundPerson.orElse(null);
     }
 
+    @Transactional
     public void save(Person person){
-        person.setDate_of_writen(new Date());
-        person.setMood(Mood.HAPPY);
-        //person.setMood(Mood.HAPPY);
+//        person.setDate_of_writen(new Date());
+//        person.setMood(Mood.HAPPY);
         peopleRepository.save(person);
     }
 
+    @Transactional
     public void update(int id,Person updatePerson){
         updatePerson.setId(id);
         peopleRepository.save(updatePerson);
     }
 
+    @Transactional
     public void delete(int id){
         peopleRepository.deleteById(id);
     }

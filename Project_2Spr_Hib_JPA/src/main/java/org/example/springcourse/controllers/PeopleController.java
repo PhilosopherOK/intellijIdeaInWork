@@ -1,6 +1,8 @@
 package org.example.springcourse.controllers;
 
 import jakarta.validation.Valid;
+import org.example.springcourse.models.Person;
+import org.example.springcourse.services.PeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

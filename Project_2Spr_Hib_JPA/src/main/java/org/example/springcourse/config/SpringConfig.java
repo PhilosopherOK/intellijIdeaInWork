@@ -9,7 +9,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -58,7 +61,7 @@ public class SpringConfig implements WebMvcConfigurer {
         templateEngine.setEnableSpringELCompiler(true);
         return templateEngine;
     }
-    @Override
+
     public void configureViewsResolvers(ViewResolverRegistry registry){
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
@@ -79,10 +82,10 @@ public class SpringConfig implements WebMvcConfigurer {
         return dataSource;
     }
 
-//    @Bean
-//    public JdbcTemplate jdbcTemplate() {
-//        return new JdbcTemplate(dataSource());
-//    }
+    @Bean
+    public JdbcTemplate jdbcTemplate() {
+        return new JdbcTemplate(dataSource());
+    }
 
     private Properties hibernateProperties() {
         Properties properties = new Properties();

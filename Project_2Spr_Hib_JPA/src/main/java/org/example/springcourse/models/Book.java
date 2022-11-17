@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 
 import javax.xml.crypto.Data;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Book")
@@ -45,13 +46,29 @@ public class Book {
 
 
     @Transient
-    private boolean expired;
+    private boolean expired = false;
 
 
     public Book(String title, String author, int year) {
         this.title = title;
         this.author = author;
         this.year = year;
+    }
+
+    public Book(){
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return year == book.year;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(year);
     }
 
     public int getId() {

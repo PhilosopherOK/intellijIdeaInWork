@@ -17,7 +17,7 @@ public class Person {
     private int id;
 
     @NotEmpty(message = "Name should not be empty")
-    @Size(min = 3,max = 15, message = "Name should be between 2 and 15 characters")
+    @Size(min = 3, max = 15, message = "Name should be between 2 and 15 characters")
     @Column(name = "fullName")
     private String fullName;
 
@@ -35,8 +35,40 @@ public class Person {
     };
 
     public Person() {
+    };
+
+    public int getId() {
+        return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public Date getDate_of_birth() {
+        return date_of_birth;
+    }
+
+    public void setDate_of_birth(Date date_of_birth) {
+        this.date_of_birth = date_of_birth;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+}
 
 //    @Column(name = "date_of_writen")
 //    @Temporal(TemporalType.TIMESTAMP)

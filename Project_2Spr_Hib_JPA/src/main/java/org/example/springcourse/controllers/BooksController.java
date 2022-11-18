@@ -2,7 +2,8 @@ package org.example.springcourse.controllers;
 
 
 import jakarta.validation.Valid;
-import org.example.springcourse.services.BookService;
+import org.example.springcourse.models.Book;
+import org.example.springcourse.services.BooksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,71 +14,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/books")
 public class BooksController {
 
-    private final BookService bookService;
-
-    @Autowired
-    public BooksController(BookService bookService) {
-        this.bookService = bookService;
-    }
-//    @GetMapping
-//    public String index(
-//            Model model){
-//        model.addAttribute("books", bookService.findAll());
-//        return "books/index";
-//    }
-
-
-//
-//        @GetMapping("/{id}")
-//        public String show(@PathVariable("id") int id, Model model) {
-//            model.addAttribute("person", peopleService.findOne(id));
-//            return "people/show";
-//        }
-//
-//        @GetMapping("/new")
-//        public String newPerson(@ModelAttribute("person") Person person) {
-//            return "people/new";
-//        }
-//
-//        @PostMapping()
-//        public String create(@ModelAttribute("person") @Valid Person person,
-//                             BindingResult bindingResult) {
-//            if (bindingResult.hasErrors())
-//                return "people/new";
-//
-//            peopleService.save(person);
-//            return "redirect:/people";
-//        }
-//
-//        @GetMapping("/{id}/edit")
-//        public String edit(Model model, @PathVariable("id") int id) {
-//            model.addAttribute("person", peopleService.findOne(id));
-//            return "people/edit";
-//        }
-//
-//        @PatchMapping("/{id}")
-//        public String update(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult,
-//                             @PathVariable("id") int id) {
-//            if (bindingResult.hasErrors())
-//                return "people/edit";
-//
-//            peopleService.update(id, person);
-//            return "redirect:/people";
-//        }
-//
-//        @DeleteMapping("/{id}")
-//        public String delete(@PathVariable("id") int id) {
-//            peopleService.delete(id);
-//            return "redirect:/people";
-//        }
-
-
     private final BooksService booksService;
 
-    public BookController(BooksService booksService) {
+    @Autowired
+    public BooksController(BooksService booksService) {
         this.booksService = booksService;
     }
-
 
     @GetMapping()
     public String index(@RequestParam(value = "page", required = false) int page,
@@ -86,7 +28,7 @@ public class BooksController {
                         Model model) {
 
         model.addAttribute("books", booksService.findAll(page, books_per_page, sort_by_year));
-        return "people/index";
+        return "books/index";
     }
 
 
@@ -96,51 +38,51 @@ public class BooksController {
 //            return "people/new";
     @GetMapping("/searching")
     public String search(@PathVariable("startingTitle") String startingTitle, Model model) {
-        model.addAttribute("Book", booksService.findByTitleStartingWith(startingTitle));
+        model.addAttribute("books", booksService.findByTitleStartingWith(startingTitle));
         return
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("person", peopleService.findOne(id));
-        return "people/show";
+        model.addAttribute("books", booksService.findOne(id));
+        return "books/show";
     }
 
     @GetMapping("/new")
-    public String newPerson(@ModelAttribute("person") Person person) {
-        return "people/new";
+    public String newPerson(@ModelAttribute("books") Book book) {
+        return "books/new";
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("person") @Valid Person person,
+    public String create(@ModelAttribute("Book") @Valid Book book,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "people/new";
+            return "books/new";
 
-        peopleService.save(person);
-        return "redirect:/people";
+        booksService.save(book);
+        return "redirect:/books";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("person", peopleService.findOne(id));
-        return "people/edit";
+        model.addAttribute("book", booksService.findOne(id));
+        return "book/edit";
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult,
+    public String update(@ModelAttribute("books") @Valid Book book, BindingResult bindingResult,
                          @PathVariable("id") int id) {
         if (bindingResult.hasErrors())
-            return "people/edit";
+            return "books/edit";
 
-        peopleService.update(id, person);
-        return "redirect:/people";
+        booksService.update(id, book);
+        return "redirect:/books";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
-        peopleService.delete(id);
-        return "redirect:/people";
+        booksService.delete(id);
+        return "redirect:/books";
     }
 }
 

@@ -39,7 +39,7 @@ public class BooksController {
     @GetMapping("/searching")
     public String search(@PathVariable("startingTitle") String startingTitle, Model model) {
         model.addAttribute("books", booksService.findByTitleStartingWith(startingTitle));
-        return
+        return "books/searching";
     }
 
     @GetMapping("/{id}")
@@ -66,7 +66,7 @@ public class BooksController {
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("book", booksService.findOne(id));
-        return "book/edit";
+        return "books/edit";
     }
 
     @PatchMapping("/{id}")
@@ -84,6 +84,4 @@ public class BooksController {
         booksService.delete(id);
         return "redirect:/books";
     }
-}
-
 }

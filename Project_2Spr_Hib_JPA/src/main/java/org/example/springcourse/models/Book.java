@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
-import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.Objects;
 
@@ -80,7 +79,7 @@ public class Book {
     }
 
     public void setTakeAt(Date takeAt) {
-        this.takeAt = takeAt;
+        this.takeAt = takeAt;;
     }
 
     public void setId(int id) {

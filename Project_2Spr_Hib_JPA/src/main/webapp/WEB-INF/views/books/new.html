@@ -2,32 +2,25 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>New person</title>
 </head>
 <body>
 
-
-<form th:method="POST" th:action="@{/people}" th:object="${person}">
-    <label for="name">Enter name: </label>
-    <input type="text" th:field="*{name}" id="name"/>
-    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+<form th:method="POST" th:action="@{/WEB-INF/views/books}" th:object="${book}">
+    <label for="title">Enter title: </label>
+    <input type="text" th:field="*{title}" id="title"/>
+    <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</div>
     <br/>
-    <label for="age">Enter age: </label>
-    <input type="text" th:field="*{age}" id="age"/>
-    <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</div>
+    <label for="author">Enter author: </label>
+    <input type="text" th:field="*{author}" id="author"/>
+    <div style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author Error</div>
     <br/>
-    <label for="email">Enter email: </label>
-    <input type="text" th:field="*{email}" id="email"/>
-    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
-    <br/>
-    <label for="date_of_birth">Enter date_of_birth: </label>
-    <input type="text" th:field="*{date_of_birth}" id="date_of_birth"/>
-    <div style="color:red" th:if="${#fields.hasErrors('date_of_birth')}" th:errors="*{date_of_birth}">date_of_birth Error</div>
+    <label for="year">Enter year: </label>
+    <input type="text" th:field="*{year}" id="year"/>
+    <div style="color:red" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Year Error</div>
     <br/>
     <input type="submit" value="Create!"/>
 </form>
-
-</body>
 
 </body>
 </html>

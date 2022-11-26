@@ -3,7 +3,9 @@ package org.example.springcourse.controllers;
 
 import jakarta.validation.Valid;
 import org.example.springcourse.models.Book;
+import org.example.springcourse.models.Person;
 import org.example.springcourse.services.BooksService;
+import org.example.springcourse.services.PeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +17,12 @@ import org.springframework.web.bind.annotation.*;
 public class BooksController {
 
     private final BooksService booksService;
+    private final PeopleService peopleService;
 
     @Autowired
-    public BooksController(BooksService booksService) {
+    public BooksController(BooksService booksService, PeopleService peopleService) {
         this.booksService = booksService;
+        this.peopleService = peopleService;
     }
 
     @GetMapping()
@@ -43,9 +47,25 @@ public class BooksController {
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
+    public String show(@PathVariable("id") int id, Model model, @ModelAttribute("person") Person person) {
         model.addAttribute("books", booksService.findOne(id));
+        if(booksService.findOne(id).getOwner() != null){
+            model.addAttribute("owner", booksService.findOne(id).getOwner());
+        }else{
+            model.addAttribute("people", peopleService.findAll());
+        }
         return "books/show";
+    }
+
+    @PatchMapping("/{id}/addHost")
+    public String addHost(@PathVariable("id") int id, @ModelAttribute("person") Person person){
+        booksService.addHostByBookId(id, person);
+        return "redirect:/books"+id;
+    }
+    @PatchMapping("/{id}/deleteHost")
+    public String deleteHost(@PathVariable("id") int id){
+        booksService.deleteHostByBookId(id);
+        return "redirect:/books"+id;
     }
 
     @GetMapping("/new")

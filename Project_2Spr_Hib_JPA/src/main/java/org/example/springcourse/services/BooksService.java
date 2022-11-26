@@ -2,6 +2,7 @@ package org.example.springcourse.services;
 
 
 import org.example.springcourse.models.Book;
+import org.example.springcourse.models.Person;
 import org.example.springcourse.repositories.BooksRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -33,6 +34,10 @@ public class BooksService {
         return booksRepository.findAll();
     }
 
+    public List<Book> findAll(){
+        return booksRepository.findAll();
+    }
+
     public Book findOne(int id) {
         Optional<Book> findBook = booksRepository.findById(id);
         return findBook.orElse(null);
@@ -41,6 +46,19 @@ public class BooksService {
     public Book findByTitleStartingWith(String startingStr) {
         Optional<Book> findBook = booksRepository.findByTitleStartingWith(startingStr);
         return findBook.orElse(null);
+    }
+
+    @Transactional
+    public void addHostByBookId(int id, Person person){
+        Book bookWithOwner = findOne(id);
+        bookWithOwner.setOwner(person);
+        booksRepository.save(bookWithOwner);
+    }
+    @Transactional
+    public void deleteHostByBookId(int id){
+        Book bookWithOutHost = findOne(id);
+        bookWithOutHost.setOwner(null);
+        booksRepository.save(bookWithOutHost);
     }
 
     @Transactional

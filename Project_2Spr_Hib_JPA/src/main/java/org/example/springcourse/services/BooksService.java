@@ -17,7 +17,7 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class BooksService {
 
-    private BooksRepository booksRepository;
+    private final BooksRepository booksRepository;
 
     public BooksService(BooksRepository booksRepository) {
         this.booksRepository = booksRepository;
@@ -25,16 +25,16 @@ public class BooksService {
 
 
     public List<Book> findAll(int page, int books_per_page, boolean sorted) {
-        if (sorted == true && page != 0 && books_per_page != 0)
+        if (sorted && page != 0 && books_per_page != 0)
             return booksRepository.findAll(PageRequest.of(page, books_per_page, Sort.by("year"))).getContent();
-        if (sorted == true)
+        if (sorted)
             return booksRepository.findAll(Sort.by("year"));
         if (page != 0 && books_per_page != 0)
             return booksRepository.findAll(PageRequest.of(page, books_per_page)).getContent();
         return booksRepository.findAll();
     }
 
-    public List<Book> findAll(){
+    public List<Book> findAll() {
         return booksRepository.findAll();
     }
 
@@ -46,19 +46,6 @@ public class BooksService {
     public Book findByTitleStartingWith(String startingStr) {
         Optional<Book> findBook = booksRepository.findByTitleStartingWith(startingStr);
         return findBook.orElse(null);
-    }
-
-    @Transactional
-    public void addHostByBookId(int id, Person person){
-        Book bookWithOwner = findOne(id);
-        bookWithOwner.setOwner(person);
-        booksRepository.save(bookWithOwner);
-    }
-    @Transactional
-    public void deleteHostByBookId(int id){
-        Book bookWithOutHost = findOne(id);
-        bookWithOutHost.setOwner(null);
-        booksRepository.save(bookWithOutHost);
     }
 
     @Transactional
@@ -75,5 +62,19 @@ public class BooksService {
     @Transactional
     public void delete(int id) {
         booksRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void addHostByBookId(int id, Person person) {
+        Book bookWithOwner = findOne(id);
+        bookWithOwner.setOwner(person);
+        booksRepository.save(bookWithOwner);
+    }
+
+    @Transactional
+    public void deleteHostByBookId(int id) {
+        Book bookWithOutHost = findOne(id);
+        bookWithOutHost.setOwner(null);
+        booksRepository.save(bookWithOutHost);
     }
 }

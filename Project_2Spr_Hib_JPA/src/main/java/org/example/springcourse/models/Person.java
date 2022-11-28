@@ -38,10 +38,14 @@ public class Person {
     public Person(String fullName, Date date_of_birth) {
         this.fullName = fullName;
         this.date_of_birth = date_of_birth;
-    };
+    }
+
+    ;
 
     public Person() {
-    };
+    }
+
+    ;
 
     public int getId() {
         return id;
@@ -73,6 +77,11 @@ public class Person {
 
     public void setBooks(List<Book> books) {
         this.books = books;
+    }
+
+    @Override
+    public String toString() {
+        return fullName + " " + date_of_birth;
     }
 }
 

@@ -14,7 +14,7 @@
     <span>This book is taken a host: </span> <span th:text="${owner.getFullName()}">Person Name</span>
 
     <form th:method="PATCH" th:action="@{/books/{id}/deleteHost(id=${book.getId()})}">
-        <input type="submit" value="Host is deleted"/>
+        <input type="submit" value="Host is delete"/>
     </form>
 </div>
 
@@ -25,7 +25,7 @@
     <label for="person"> take a host: </label>
     <select th:object="${person}" th:field="*{id}" id="person">
         <option th:each="person : ${people}" th:value="${person.getId()}"
-                th:text="${person.getFullname()}"></option>
+                th:text="${person.getFullName()}"></option>
     </select>
     <input type="submit" value="Host is added"/>
 </form>

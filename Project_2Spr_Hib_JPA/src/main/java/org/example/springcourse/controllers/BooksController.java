@@ -6,6 +6,7 @@ import org.example.springcourse.models.Book;
 import org.example.springcourse.models.Person;
 import org.example.springcourse.services.BooksService;
 import org.example.springcourse.services.PeopleService;
+import org.example.springcourse.util.BooksValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +19,13 @@ public class BooksController {
 
     private final BooksService booksService;
     private final PeopleService peopleService;
+    private final BooksValidator booksValidator;
 
     @Autowired
-    public BooksController(BooksService booksService, PeopleService peopleService) {
+    public BooksController(BooksService booksService, PeopleService peopleService, BooksValidator booksValidator) {
         this.booksService = booksService;
         this.peopleService = peopleService;
+        this.booksValidator = booksValidator;
     }
 
     @GetMapping()
@@ -40,15 +43,21 @@ public class BooksController {
 //                         BindingResult bindingResult) {
 //        if (bindingResult.hasErrors())
 //            return "people/new";
-    @GetMapping("/searching")
-    public String search(@PathVariable("startingTitle") String startingTitle, Model model) {
-        model.addAttribute("books", booksService.findByTitleStartingWith(startingTitle));
-        return "books/searching";
+
+    @GetMapping("/search")
+    public String search(@RequestParam(value = "startingTitle", required = false) String startingTitle, Model model,
+                         @ModelAttribute("book") @Valid Book book, BindingResult bindingResult) {
+        booksValidator.validate(book, bindingResult);
+            if (bindingResult.hasErrors()) {
+                return "books/search";
+            }
+            model.addAttribute("book", booksService.findByTitleStartingWith(startingTitle));
+        return "books/search";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model, @ModelAttribute("person") Person person) {
-        model.addAttribute("books", booksService.findOne(id));
+        model.addAttribute("book", booksService.findOne(id));
         if(booksService.findOne(id).getOwner() != null){
             model.addAttribute("owner", booksService.findOne(id).getOwner());
         }else{
@@ -69,12 +78,12 @@ public class BooksController {
     }
 
     @GetMapping("/new")
-    public String newPerson(@ModelAttribute("books") Book book) {
+    public String newPerson(@ModelAttribute("book") Book book) {
         return "books/new";
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("Book") @Valid Book book,
+    public String create(@ModelAttribute("book") @Valid Book book,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "books/new";

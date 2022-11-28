@@ -2,7 +2,6 @@ package org.example.springcourse.controllers;
 
 import jakarta.validation.Valid;
 import org.example.springcourse.models.Person;
-import org.example.springcourse.services.BooksService;
 import org.example.springcourse.services.PeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,12 +14,10 @@ import org.springframework.web.bind.annotation.*;
 public class PeopleController {
 
     private final PeopleService peopleService;
-    private final BooksService booksService;
 
     @Autowired
-    public PeopleController(PeopleService peopleService, BooksService booksService) {
+    public PeopleController(PeopleService peopleService) {
         this.peopleService = peopleService;
-        this.booksService = booksService;
     }
 
     @GetMapping()
@@ -38,7 +35,7 @@ public class PeopleController {
 
     @GetMapping("/new")
     public String newPerson(@ModelAttribute("person") Person person) {
-        return "/WEB-INF/views/books/new.html";
+        return "/people/new";
     }
 
     @PostMapping()

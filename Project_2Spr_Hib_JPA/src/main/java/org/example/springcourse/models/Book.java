@@ -52,9 +52,8 @@ public class Book {
 //    @Temporal(TemporalType.TIMESTAMP)
 //    private Date takeAt;
 
-
-    @Transient
-    private boolean expired = false;
+//    @Transient
+//    private boolean expired = false;
 
 
     public Book(String title, String author, int year) {
@@ -63,7 +62,7 @@ public class Book {
         this.year = year;
     }
 
-    public Book(){
+    public Book() {
     }
 
     @Override
@@ -118,15 +117,5 @@ public class Book {
 
     public void setOwner(Person owner) {
         this.owner = owner;
-    }
-
-
-
-    public boolean getExpired() {
-        return expired;
-    }
-
-    public void setExpired(boolean expired) {
-        this.expired = expired;
     }
 }

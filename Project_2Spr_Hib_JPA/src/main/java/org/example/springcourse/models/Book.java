@@ -16,7 +16,7 @@ import java.util.Objects;
     author varchar NOT NULL ,
     year int check ( year > 1900 ),
     owner int REFERENCES Person(id) ON DELETE SET NULL,
-    takeAt TIMESTAMP
+    date_of_takeBook TIMESTAMP
 ) */
 @Entity
 @Table(name = "Book")
@@ -45,15 +45,13 @@ public class Book {
     private Person owner;
 
 
-    //    @Column(name = "date_of_writen")
-//    @Temporal(TemporalType.TIMESTAMP)
-//    private Date date_of_writen;
-//    @Column(name = "taken_at")
-//    @Temporal(TemporalType.TIMESTAMP)
-//    private Date takeAt;
+    @Column(name = "date_of_takeBook")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date_of_takeBook = null;
 
-//    @Transient
-//    private boolean expired = false;
+
+    @Transient
+    private boolean stitched = false;
 
 
     public Book(String title, String author, int year) {
@@ -117,5 +115,21 @@ public class Book {
 
     public void setOwner(Person owner) {
         this.owner = owner;
+    }
+
+    public Date getDate_of_takeBook() {
+        return date_of_takeBook;
+    }
+
+    public void setDate_of_takeBook(Date date_of_takeBook) {
+        this.date_of_takeBook = date_of_takeBook;
+    }
+
+    public boolean isStitched() {
+        return stitched;
+    }
+
+    public void setStitched(boolean stitched) {
+        this.stitched = stitched;
     }
 }

@@ -8,7 +8,7 @@
 <p th:text="${person.getFullName() + ', ' + person.getDate_of_birth()}">VALUE</p>
 
 
-<div th:if="${books.isEmpty()}">
+<div th:if="${books.isEmpty()} and ${booksStitched.isEmpty()}">
     <p>Person doesn't take any books</p>
 <hr/>
 </div>
@@ -20,8 +20,14 @@
     <table th:each="book: ${books}">
         <tr th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYear()}">book</tr>
     </table>
+</div>
+<div th:if="${!booksStitched.isEmpty()}">
+    <table th:each="book: ${booksStitched}">
+        <tr style="color:red" th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYear()}">book</tr>
+    </table>
     <hr/>
 </div>
+
 
 <a th:href="@{/people/{id}/edit(id=${person.getId()})}">Edit</a>
 

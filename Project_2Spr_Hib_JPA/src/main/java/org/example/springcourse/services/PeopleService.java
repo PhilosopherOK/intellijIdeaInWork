@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,36 +23,64 @@ public class PeopleService {
         this.peopleRepository = peopleRepository;
     }
 
-    public List<Person> findAll(){
+    public List<Person> findAll() {
         return peopleRepository.findAll();
     }
 
-    public Person findOne(int id){
+    public Person findOne(int id) {
         Optional<Person> foundPerson = peopleRepository.findById(id);
         return foundPerson.orElse(null);
     }
 
     @Transactional
-    public List<Book> takeBooksByHostId(int id){
-        Person personBooks = findOne(id);
-        return personBooks.getBooks();
+    public List<Book> checkToStitch(List<Book> list) {
+        Date toDay = new Date();
+        for (Book book : list) {
+            long timeStitched = toDay.getTime() - book.getDate_of_takeBook().getTime();
+            if (timeStitched > 51840000) {
+                book.setStitched(true);
+            }
+        }
+        return list;
     }
 
     @Transactional
-    public void save(Person person){
-//        person.setDate_of_writen(new Date());
-//        person.setMood(Mood.HAPPY);
+    public List<Book> takeStitchedBooks(int id) {
+        List<Book> listOfBooks = findOne(id).getBooks();
+        checkToStitch(listOfBooks);
+        for (Book book : listOfBooks) {
+            if (!book.isStitched()) {
+                listOfBooks.remove(book);
+            }
+        }
+        return listOfBooks;
+    }
+
+    @Transactional
+    public List<Book> takeBooksWithOutStitched(int id) {
+        List<Book> listOfBooks = findOne(id).getBooks();
+        checkToStitch(listOfBooks);
+        for (Book book : listOfBooks) {
+            if (book.isStitched()) {
+                listOfBooks.remove(book);
+            }
+        }
+        return listOfBooks;
+    }
+
+    @Transactional
+    public void save(Person person) {
         peopleRepository.save(person);
     }
 
     @Transactional
-    public void update(int id,Person updatePerson){
+    public void update(int id, Person updatePerson) {
         updatePerson.setId(id);
         peopleRepository.save(updatePerson);
     }
 
     @Transactional
-    public void delete(int id){
+    public void delete(int id) {
         peopleRepository.deleteById(id);
     }
 }

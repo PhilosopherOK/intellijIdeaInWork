@@ -67,6 +67,7 @@ public class BooksService {
     @Transactional
     public void addHostByBookId(int id, Person person) {
         Book bookWithOwner = findOne(id);
+        bookWithOwner.setDate_of_takeBook(new Date());
         bookWithOwner.setOwner(person);
         booksRepository.save(bookWithOwner);
     }
@@ -74,6 +75,7 @@ public class BooksService {
     @Transactional
     public void deleteHostByBookId(int id) {
         Book bookWithOutHost = findOne(id);
+        bookWithOutHost.setDate_of_takeBook(null);
         bookWithOutHost.setOwner(null);
         booksRepository.save(bookWithOutHost);
     }

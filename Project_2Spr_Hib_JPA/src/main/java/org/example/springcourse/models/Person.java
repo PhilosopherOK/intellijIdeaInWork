@@ -35,17 +35,14 @@ public class Person {
     @OneToMany(mappedBy = "owner")
     private List<Book> books;
 
+
     public Person(String fullName, Date date_of_birth) {
         this.fullName = fullName;
         this.date_of_birth = date_of_birth;
     }
 
-    ;
-
     public Person() {
     }
-
-    ;
 
     public int getId() {
         return id;
@@ -79,13 +76,11 @@ public class Person {
         this.books = books;
     }
 
+
     @Override
     public String toString() {
         return fullName + " " + date_of_birth;
     }
 }
 
-//    @Column(name = "date_of_writen")
-//    @Temporal(TemporalType.TIMESTAMP)
-//    private Date date_of_writen;
 

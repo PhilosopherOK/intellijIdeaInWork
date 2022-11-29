@@ -29,7 +29,8 @@ public class PeopleController {
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("person", peopleService.findOne(id));
-        model.addAttribute("books", peopleService.takeBooksByHostId(id));
+        model.addAttribute("books", peopleService.takeBooksWithOutStitched(id));
+        model.addAttribute("booksStitched", peopleService.takeStitchedBooks(id));
         return "people/show";
     }
 

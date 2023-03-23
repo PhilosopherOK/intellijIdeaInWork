@@ -20,8 +20,8 @@ public class PersonService {
     }
 
     public void register(Person person){
-        person.setPassword(passwordEncoder.encode(person.getPassword()));
         person.setRole("ROLE_USER");
+        person.setPassword(passwordEncoder.encode(person.getPassword()));
         peopleRepository.save(person);
     }
 

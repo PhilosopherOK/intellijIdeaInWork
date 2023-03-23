@@ -36,8 +36,8 @@ public class Person {
     @NotNull(message = "mush be not empty")
     private String password;
 
+
     @Column(name = "role")
-    @NotNull
     private String role;
 
 

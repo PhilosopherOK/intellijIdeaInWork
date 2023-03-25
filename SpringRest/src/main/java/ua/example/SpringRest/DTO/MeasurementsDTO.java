@@ -15,11 +15,12 @@ public class MeasurementsDTO {
     @NotNull
     @Min(value = -100, message = "mush be more than -100")
     @Max(value = 100, message = "mush be least than -100")
-    private int value;
+    private Integer value;
 
     @NotNull
-    private boolean raining;
+    private Boolean raining;
 
+    @NotNull
     private Sensor sensor;
 
 

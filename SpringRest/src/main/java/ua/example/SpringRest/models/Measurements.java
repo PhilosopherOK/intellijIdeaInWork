@@ -31,25 +31,24 @@ public class Measurements {
     @Column(name = "value")
     @Min(value = -100, message = "mush be more than -100")
     @Max(value = 100, message = "mush be least than -100")
-    private int value;
+    private Integer value;
 
     @NotNull
     @Column(name = "raining")
-    private boolean raining;
+    private Boolean raining;
 
+    @NotNull
     @ManyToOne
-    @Cascade(value = org.hibernate.annotations.CascadeType.DELETE)
     @JoinColumn(name = "sensor", referencedColumnName = "name")
     private Sensor sensor;
 
     @Column(name = "timeToDo")
     private LocalDateTime timeToDo;
 
-    public Measurements(int value, boolean raining, Sensor sensor, LocalDateTime timeToDo) {
+    public Measurements(int value, boolean raining, Sensor sensor) {
         this.value = value;
         this.raining = raining;
         this.sensor = sensor;
-        this.timeToDo = timeToDo;
     }
 
     public Measurements() {
@@ -93,5 +92,15 @@ public class Measurements {
 
     public void setTimeToDo(LocalDateTime timeToDo) {
         this.timeToDo = timeToDo;
+    }
+
+    @Override
+    public String toString() {
+        return "Measurements{" +
+                "value=" + value +
+                ", raining=" + raining +
+                ", sensor=" + sensor +
+                ", timeToDo=" + timeToDo +
+                '}';
     }
 }

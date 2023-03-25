@@ -7,19 +7,26 @@ import ua.example.SpringRest.models.Measurements;
 import ua.example.SpringRest.repositories.MeasurementsRepositories;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class MeasurementsService {
     private final MeasurementsRepositories measurementsRepositories;
+    private final SensorService sensorService;
 
     @Autowired
-    public MeasurementsService(MeasurementsRepositories measurementsRepositories) {
+    public MeasurementsService(MeasurementsRepositories measurementsRepositories, SensorService sensorService) {
         this.measurementsRepositories = measurementsRepositories;
+        this.sensorService = sensorService;
     }
 
-    public void registration(Measurements measurements){
+    public List<Measurements> findAll() {
+        return measurementsRepositories.findAll();
+    }
+
+    public void add(Measurements measurements) {
         measurements.setTimeToDo(LocalDateTime.now());
+        measurements.setSensor(sensorService.findByName(measurements.getSensor().getName()));
         measurementsRepositories.save(measurements);
     }
-
 }

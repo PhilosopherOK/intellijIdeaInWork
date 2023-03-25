@@ -2,7 +2,10 @@ package ua.example.SpringRest.models;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /*
 CREATE TABLE Sensor(
@@ -12,14 +15,15 @@ CREATE TABLE Sensor(
  */
 @Entity
 @Table(name = "sensor")
-public class Sensor {
+public class Sensor implements Serializable {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull
+    @NotEmpty(message = "name mush be empty")
+    @Size(min = 3, max = 30, message = "name mush be between 3 and 30 letters")
     @Column(name = "name")
     private String name;
 
@@ -44,5 +48,13 @@ public class Sensor {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Sensor{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

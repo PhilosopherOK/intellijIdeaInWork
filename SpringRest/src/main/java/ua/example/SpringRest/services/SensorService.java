@@ -3,11 +3,10 @@ package ua.example.SpringRest.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.example.SpringRest.DTO.SensorDTO;
 import ua.example.SpringRest.models.Sensor;
 import ua.example.SpringRest.repositories.SensorRepositories;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class SensorService {
@@ -19,12 +18,15 @@ public class SensorService {
         this.sensorRepositories = sensorRepositories;
     }
 
-    public void save(Sensor sensor){
+    public void register(Sensor sensor){
     sensorRepositories.save(sensor);
     }
 
+    public List<Sensor> findAll(){
+        return sensorRepositories.findAll();
+    }
 
-    public Optional<Sensor> findByName(String name){
-        return sensorRepositories.findByName(name);
+    public Sensor findByName(String name){
+        return sensorRepositories.findByName(name).stream().findAny().orElse(null);
     }
 }

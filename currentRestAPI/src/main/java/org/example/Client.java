@@ -19,11 +19,10 @@ public class Client {
 
         registerSensor(sensorName);
 
-        double minTemperature = 0;
-        double maxTemperature = 45;
+        int maxTemperature = 45;
         for (int i = 0; i < 500; i++) {
             System.out.println(i);
-            sendMeasurement(random.nextInt()* maxTemperature,
+            sendMeasurement(random.nextInt(maxTemperature),
                     random.nextBoolean(), sensorName);
         }
     }

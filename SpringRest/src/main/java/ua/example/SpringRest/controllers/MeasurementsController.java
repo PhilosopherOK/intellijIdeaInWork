@@ -57,22 +57,6 @@ public class MeasurementsController {
         }
         measurementsService.add(measurementsToAdd);
         return ResponseEntity.ok(HttpStatus.OK);
-
-
-//        if (bindingResult.hasErrors()) {
-//            StringBuilder errorMessage = new StringBuilder();
-//
-//            List<FieldError> errors = bindingResult.getFieldErrors();
-//            for (FieldError error : errors) {
-//                errorMessage.append(error.getField())
-//                        .append(" - ").append(error.getDefaultMessage())
-//                        .append(";");
-//            }
-//            throw new MeasurementsErrorAdd(errorMessage.toString());
-//        }
-//
-//        measurementsService.add(convertToMeasurements(measurementsDTO));
-//        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @ExceptionHandler

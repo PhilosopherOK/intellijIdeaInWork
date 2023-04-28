@@ -25,8 +25,12 @@ public class MeasurementsService {
     }
 
     public void add(Measurements measurements) {
-        measurements.setTimeToDo(LocalDateTime.now());
-        measurements.setSensor(sensorService.findByName(measurements.getSensor().getName()));
+        enrichMeasurement(measurements);
         measurementsRepositories.save(measurements);
+    }
+
+    public void enrichMeasurement(Measurements measurements){
+        measurements.setSensor(sensorService.findByName(measurements.getSensor().getName()));
+        measurements.setTimeToDo(LocalDateTime.now());
     }
 }

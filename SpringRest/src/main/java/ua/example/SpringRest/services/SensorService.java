@@ -18,15 +18,15 @@ public class SensorService {
         this.sensorRepositories = sensorRepositories;
     }
 
-    public void register(Sensor sensor){
-    sensorRepositories.save(sensor);
+    public void register(Sensor sensor) {
+        sensorRepositories.save(sensor);
     }
 
-    public List<Sensor> findAll(){
+    public List<Sensor> findAll() {
         return sensorRepositories.findAll();
     }
 
-    public Sensor findByName(String name){
+    public Sensor findByName(String name) {
         return sensorRepositories.findByName(name).stream().findAny().orElse(null);
     }
 }

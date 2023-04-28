@@ -49,25 +49,12 @@ public class SensorController {
         Sensor sensorToAdd = convertToSensor(sensorDTO);
 
         sensorValidate.validate(sensorToAdd, bindingResult);
+
         if (bindingResult.hasErrors())
             returnErrorsToClient(bindingResult);
 
         sensorService.register(sensorToAdd);
         return ResponseEntity.ok(HttpStatus.OK);
-//        if(bindingResult.hasErrors()){
-//            StringBuilder errorMessage = new StringBuilder();
-//
-//            List<FieldError> errors = bindingResult.getFieldErrors();
-//            for(FieldError error : errors){
-//                errorMessage.append(error.getField())
-//                        .append(" - ").append(error.getDefaultMessage())
-//                        .append(";");
-//            }
-//            throw new SensorNameError(errorMessage.toString());
-//        }
-//
-//        sensorService.save(convertToSensor(sensorDTO));
-//        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @ExceptionHandler

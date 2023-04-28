@@ -14,7 +14,7 @@ CREATE TABLE Measurements(
     value int CHECK ( value < 100 and value > -100 ) NOT NULL,
     raining boolean NOT NULL,
     sensor VARCHAR REFERENCES Sensor (name) on delete CASCADE NOT NULL,
-    timeToDo TIMESTAMP NOT NULL
+    time_to_do TIMESTAMP NOT NULL
 );
  */
 @Entity
@@ -42,7 +42,7 @@ public class Measurements {
     @JoinColumn(name = "sensor", referencedColumnName = "name")
     private Sensor sensor;
 
-    @Column(name = "timeToDo")
+    @Column(name = "time_to_do")
     @NotNull
     private LocalDateTime timeToDo;
 
